@@ -1,0 +1,409 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Facebook Application</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f0f2f5;
+}
+
+/* Navigation */
+.navbar {
+    background: #1877f2;
+    color: white;
+    padding: 12px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.search {
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    width: 250px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+    font-size: 18px;
+}
+
+/* Main layout */
+.container {
+    display: grid;
+    grid-template-columns: 240px minmax(300px, 600px) 240px;
+    gap: 20px;
+    max-width: 1150px;
+    margin: 25px auto;
+    padding: 0 10px;
+}
+
+.sidebar, .rightbar {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    height: fit-content;
+}
+
+.sidebar p, .rightbar p {
+    padding: 12px 0;
+    font-weight: bold;
+    color: #444;
+}
+
+.content {
+    min-width: 0;
+}
+
+/* Stories */
+.stories {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.story {
+    min-width: 105px;
+    height: 150px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #1877f2, #8b5cf6);
+    color: white;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 10px;
+    font-weight: bold;
+}
+
+/* Create post */
+.create-post, .post {
+    background: white;
+    padding: 18px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.create-post input {
+    width: 100%;
+    padding: 13px;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    margin: 12px 0;
+}
+
+.create-post button {
+    background: #1877f2;
+    color: white;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    background: #1877f2;
+    color: white;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-weight: bold;
+}
+
+.post p {
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.post-actions {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid #ddd;
+    padding-top: 12px;
+}
+
+.post-actions button {
+    background: none;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.post-actions button:hover {
+    background: #f0f2f5;
+}
+
+.comment-box {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    margin-top: 12px;
+}
+
+.comment {
+    background: #f0f2f5;
+    padding: 10px;
+    margin-top: 8px;
+    border-radius: 12px;
+}
+
+@media(max-width: 850px) {
+    .container {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+    }
+    .sidebar, .rightbar {
+        display: none;
+    }
+    .search {
+        width: 130px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <div class="logo">facebook</div>
+    <input class="search" placeholder="Search Facebook">
+    <div class="nav-links">
+        <span>🏠</span>
+        <span>👥</span>
+        <span>🎬</span>
+        <span>🔔</span>
+        <span>👤</span>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- Left Sidebar -->
+    <div class="sidebar">
+        <p>👤 My Profile</p>
+        <p>👥 Friends</p>
+        <p>🕒 Memories</p>
+        <p>💾 Saved</p>
+        <p>👨‍👩‍👧 Groups</p>
+        <p>🎥 Video</p>
+        <p>🛒 Marketplace</p>
+        <p>📅 Events</p>
+    </div>
+
+    <!-- News Feed -->
+    <div class="content">
+
+        <!-- Stories -->
+        <div class="stories">
+            <div class="story">➕ Create Story</div>
+            <div class="story">Rahul</div>
+            <div class="story">Priya</div>
+            <div class="story">Amit</div>
+            <div class="story">Sneha</div>
+        </div>
+
+        <!-- Create Post -->
+        <div class="create-post">
+            <h3>Create Post</h3>
+            <input type="text" id="postInput"
+                placeholder="What's on your mind?">
+            <button onclick="createPost()">Post</button>
+        </div>
+
+        <!-- Posts -->
+        <div id="feed">
+
+            <div class="post">
+                <div class="post-header">
+                    <div class="avatar">R</div>
+                    <div>
+                        <b>Rahul Sharma</b>
+                        <p>2 hours ago</p>
+                    </div>
+                </div>
+
+                <p>Welcome to my Facebook application! 😊
+                Have a wonderful day everyone!</p>
+
+                <div class="post-actions">
+                    <button onclick="likePost(this)">👍 Like <span>0</span></button>
+                    <button onclick="focusComment(this)">💬 Comment</button>
+                    <button onclick="sharePost()">↗ Share</button>
+                </div>
+
+                <input class="comment-box"
+                    placeholder="Write a comment..."
+                    onkeydown="addComment(event, this)">
+                <div class="comments"></div>
+            </div>
+
+            <div class="post">
+                <div class="post-header">
+                    <div class="avatar">P</div>
+                    <div>
+                        <b>Priya Kumar</b>
+                        <p>5 hours ago</p>
+                    </div>
+                </div>
+
+                <p>Enjoying a beautiful day with friends! ❤️</p>
+
+                <div class="post-actions">
+                    <button onclick="likePost(this)">👍 Like <span>0</span></button>
+                    <button onclick="focusComment(this)">💬 Comment</button>
+                    <button onclick="sharePost()">↗ Share</button>
+                </div>
+
+                <input class="comment-box"
+                    placeholder="Write a comment..."
+                    onkeydown="addComment(event, this)">
+                <div class="comments"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Right Sidebar -->
+    <div class="rightbar">
+        <h3>Contacts</h3>
+        <p>🟢 Rahul Sharma</p>
+        <p>🟢 Priya Kumar</p>
+        <p>🟢 Amit Singh</p>
+        <p>🟢 Sneha Reddy</p>
+        <p>🟢 Arjun Patel</p>
+    </div>
+
+</div>
+
+<script>
+
+// Create new post
+function createPost() {
+    let input = document.getElementById("postInput");
+    let text = input.value.trim();
+
+    if (text === "") {
+        alert("Please write something!");
+        return;
+    }
+
+    let post = document.createElement("div");
+    post.className = "post";
+
+    let header = document.createElement("div");
+    header.className = "post-header";
+    header.innerHTML = `
+        <div class="avatar">U</div>
+        <div><b>You</b><p>Just now</p></div>
+    `;
+
+    let message = document.createElement("p");
+    message.textContent = text;
+
+    let actions = document.createElement("div");
+    actions.className = "post-actions";
+
+    actions.innerHTML = `
+        <button onclick="likePost(this)">👍 Like <span>0</span></button>
+        <button onclick="focusComment(this)">💬 Comment</button>
+        <button onclick="sharePost()">↗ Share</button>
+    `;
+
+    let commentInput = document.createElement("input");
+    commentInput.className = "comment-box";
+    commentInput.placeholder = "Write a comment...";
+    commentInput.addEventListener("keydown", function(event) {
+        addComment(event, this);
+    });
+
+    let comments = document.createElement("div");
+    comments.className = "comments";
+
+    post.append(header, message, actions, commentInput, comments);
+
+    document.getElementById("feed").prepend(post);
+    input.value = "";
+}
+
+// Like post
+function likePost(button) {
+    let count = button.querySelector("span");
+    let liked = button.dataset.liked === "true";
+
+    let number = Number(count.textContent);
+    count.textContent = liked ? number - 1 : number + 1;
+
+    button.dataset.liked = liked ? "false" : "true";
+    button.style.color = liked ? "#333" : "#1877f2";
+}
+
+// Comment focus
+function focusComment(button) {
+    let post = button.closest(".post");
+    post.querySelector(".comment-box").focus();
+}
+
+// Add comment
+function addComment(event, input) {
+    if (event.key !== "Enter") return;
+
+    let text = input.value.trim();
+    if (text === "") return;
+
+    let comment = document.createElement("div");
+    comment.className = "comment";
+
+    let bold = document.createElement("b");
+    bold.textContent = "You: ";
+
+    comment.append(bold, document.createTextNode(text));
+
+    input.nextElementSibling.appendChild(comment);
+    input.value = "";
+}
+
+// Share post
+function sharePost() {
+    alert("Post shared successfully!");
+}
+
+</script>
+
+</body>
+</html>
